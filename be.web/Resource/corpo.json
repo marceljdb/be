@@ -1,0 +1,26 @@
+{
+  "Cabeca": {
+    "Rotacao": "MINUS_90",
+    "Inclinacao": "CIMA"
+  },
+  "Bracos": [
+    {
+      "Lado": "DIREITO",
+      "Pulso": {
+        "PulsoStatus": "MINUS_90"
+      },
+      "Cotovelo": {
+        "CotoveloStatus": "REPOUSO"
+      }
+    },
+    {
+      "Lado": "ESQUERDO",
+      "Pulso": {
+        "PulsoStatus": "MINUS_90"
+      },
+      "Cotovelo": {
+        "CotoveloStatus": "FORTEMENTE_CONTRAIDO"
+      }
+    }
+  ]
+}
