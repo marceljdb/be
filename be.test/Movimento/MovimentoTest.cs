@@ -51,7 +51,7 @@ namespace be.test.MovimentoTest
             var MovimentoRepository = Kernel.Get<MovimentoRepository>();
             var movimento = MovimentoRepository.FindFirst();
             var braco = (movimento.Bracos.Find(u => u.Lado.Equals(Lado.DIREITO)));
-            braco.Cotovelo.IsValid(CotoveloStatus.CONTRAIDO);
+            braco.Cotovelo.IsValid(CotoveloStatus.LEVEMENTE_CONTRAIDO);
         }
 
 

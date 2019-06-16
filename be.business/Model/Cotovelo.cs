@@ -25,7 +25,7 @@ namespace be.business.Model
         {
             if (!EnumUtils.EnumValidOrder<CotoveloStatus>(CotoveloStatus, (int)status))
             {
-                throw new Exception("Cotovelo indisponível. Movimento deve ser sequencial crescente/decrescente. Atual: " + status.ToString());
+                throw new Exception("Cotovelo indisponível. Movimento deve ser sequencial crescente/decrescente. Atual: " + CotoveloStatus.ToString());
             }
         }
 
@@ -34,12 +34,12 @@ namespace be.business.Model
     public enum CotoveloStatus
     {
         [Display(Name = "Repouso")]
-        REPOUSO,
+        REPOUSO = 0,
         [Display(Name = "Levemente Contraido")]
-        LEVEMENTE_CONTRAIDO,
+        LEVEMENTE_CONTRAIDO = 1,
         [Display(Name = "Contraido")]
-        CONTRAIDO,
+        CONTRAIDO = 2,
         [Display(Name = "Fortemente Contraido")]
-        FORTEMENTE_CONTRAIDO
+        FORTEMENTE_CONTRAIDO = 3
     }
 }

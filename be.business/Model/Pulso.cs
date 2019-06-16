@@ -43,15 +43,15 @@ namespace be.business.Model
     public enum PulsoStatus
     {
         [Display(Name = "-90 Graus")]
-        MINUS_90,
+        MINUS_90 = 0,
         [Display(Name = "-45 Graus")]
-        MINUS_45,
+        MINUS_45 = 1,
         [Display(Name = "Repouso")]
-        REPOUSO,
+        REPOUSO = 2,
         [Display(Name = "45 Graus")]
-        MAJOR_45,
+        MAJOR_45 = 3,
         [Display(Name = "90 Graus")]
-        MAJOR_90,
+        MAJOR_90 = 4,
         [Display(Name = "135 Graus")]
         MAJOR_135,
         [Display(Name = "180 Graus")]

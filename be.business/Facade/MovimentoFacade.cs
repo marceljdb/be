@@ -19,12 +19,7 @@ namespace be.business.Facade
 
         public void Atualizar(Movimento movimento)
         {
-            var mov = MovimentoRepository.FindById(movimento.Id);
-            var a = JsonConvert.DeserializeObject<Movimento>(mov.Movimento);
-            
-
-            mov.Movimento = JsonConvert.SerializeObject(movimento);
-            MovimentoRepository.UpdateAndFlush(mov);
+           
         }
 
         public Movimento Pesquisar()

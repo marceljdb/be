@@ -14,7 +14,7 @@ namespace be.business.Model
         public const string SCHEMA_PROPERTY = CONNECTION + ".Schema";
 
         public BeModel()
-            : base(new SqlCeConnection(@"Data Source=C:\Users\marcel.bueno\source\repos\be\bedb.sdf;Password=dbpass"), true)
+            : base(new SqlCeConnection(@"Data Source="+ AppDomain.CurrentDomain.BaseDirectory + "bedb.sdf;Password=dbpass"), true)
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;

@@ -36,16 +36,7 @@ namespace be.Controllers
         {
             try
             {
-                var mov = MovimentoRepository.FindById(movimento.Id);    
-                var a = JsonConvert.DeserializeObject<Movimento>(mov.Movimento);
-                a.Cabeca.IsValid(movimento.Cabeca);
-                foreach (var item in a.Bracos)
-                {
-                    var braco = movimento.Bracos.Find(u => u.Lado.Equals(item.Lado));
-                    item.IsValid(braco);
-                }              
-                mov.Movimento = JsonConvert.SerializeObject(movimento);                
-                MovimentoRepository.UpdateAndFlush(mov);
+                MovimentoRepository.Update(movimento);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (Exception e)

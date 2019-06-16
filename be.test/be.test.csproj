@@ -81,6 +81,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <Content Include="bedb.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\corpo.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

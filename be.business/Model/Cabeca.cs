@@ -56,24 +56,24 @@ namespace be.business.Model
     public enum RotacaoStatus
     {
         [Display(Name = "-90 Graus")]
-        MINUS_90,
+        MINUS_90 = 0,
         [Display(Name = "-45 Graus")]
-        MINUS_45,
+        MINUS_45 = 1,
         [Display(Name = "Repouso")]
-        REPOUSO,
+        REPOUSO = 2,
         [Display(Name = "45 Graus")]
-        MAJOR_45,
+        MAJOR_45 = 3,
         [Display(Name = "90 Graus")]
-        MAJOR_90
+        MAJOR_90 = 4
     }
 
     public enum InclinacaoStatus
     {
         [Display(Name = "Cima")]
-        CIMA,
+        CIMA = 0,
         [Display(Name = "Repouso")]
-        REPOUSO,
+        REPOUSO = 1,
         [Display(Name = "Baixo")]
-        BAIXO
+        BAIXO = 2
     }
 }

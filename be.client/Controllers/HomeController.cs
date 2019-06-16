@@ -28,7 +28,8 @@ namespace WebApplication4.Controllers
                 try
                 {
                     movimento = Service.Get();
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     return RedirectToAction("Index", "Error");
                 }
@@ -36,6 +37,19 @@ namespace WebApplication4.Controllers
             return View(movimento);
         }
 
+        public ActionResult Detail(Movimento movimento)
+        {
+            try
+            {
+                movimento = Service.Get();
+                return View(movimento);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
+        }
 
         [HttpPost]
         public string Atualizar(Movimento movimento)
@@ -44,12 +58,13 @@ namespace WebApplication4.Controllers
             {
                 Service.Put(movimento);
                 return "Alterado!";
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 ModelState.AddModelError("", e);
                 return e.Message;
             }
-            
+
         }
 
 

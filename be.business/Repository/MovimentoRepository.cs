@@ -21,11 +21,35 @@ namespace be.business.Repository
             return JsonConvert.DeserializeObject<Movimento>(movimento.Movimento);
         }
 
-        public MovimentoEntity FindById(int id)
+        public Movimento FindById(int id)
+        {
+            var movimento = BeModel.Movimento.Where(u => u.Id.Equals(id)).SingleOrDefault();
+            return JsonConvert.DeserializeObject<Movimento>(movimento.Movimento);
+        }
+
+        public MovimentoEntity FindEntityById(int id)
         {
             return BeModel.Movimento.Where(u => u.Id.Equals(id)).SingleOrDefault();
         }
 
-       
+        public void Update(Movimento movimento)
+        {
+            IsValid(movimento);
+            var entity = FindEntityById(movimento.Id);
+            entity.Movimento = JsonConvert.SerializeObject(movimento);
+            UpdateAndFlush(entity);            
+        }
+
+        private void IsValid(Movimento movimento)
+        {
+            var mov = FindById(movimento.Id);
+            mov.Cabeca.IsValid(movimento.Cabeca);
+            foreach (var item in mov.Bracos)
+            {
+                var braco = movimento.Bracos.Find(u => u.Lado.Equals(item.Lado));
+                item.IsValid(braco);
+            }
+        }
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model be.business.Model.Movimento
 
 @{
-    ViewBag.Title = "Controle";
+    ViewBag.Title = "Status";
 }
 
 <body>
@@ -22,15 +22,17 @@
     </script>
 </body>
 
-<div class="jumbotron text-center" style="background: rgb(39, 40, 34);">
-    <h1>Controle R.O.B.O</h1>
-</div>
 
 <div class="alert divError" role="alert" style="display: none" id="success-alert">
 
 </div>
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formMovimento" }))
 {
+
+
+    <div class="jumbotron text-center" style="background: rgb(39, 40, 34);">
+        <h1>Status R.O.B.O</h1>
+    </div>
 
     <div class="row text-center title-text">
         <h1>CABEÇA</h1>
@@ -41,10 +43,8 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Cabeca.RotacaoStatus, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.EnumDropDownListFor(model => model.Cabeca.RotacaoStatus, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Cabeca.RotacaoStatus, "", new { @class = "text-danger" })
+                    @Html.Label(be.client.Source.EnumHelper.GetEnumName<be.business.Model.RotacaoStatus>(Model.Cabeca.RotacaoStatus))
                 </div>
-
 
             </div>
         </div>
@@ -53,10 +53,8 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Cabeca.InclinacaoStatus, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.EnumDropDownListFor(model => model.Cabeca.InclinacaoStatus, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Cabeca.InclinacaoStatus, "", new { @class = "text-danger" })
+                    @Html.Label(be.client.Source.EnumHelper.GetEnumName<be.business.Model.InclinacaoStatus>(Model.Cabeca.InclinacaoStatus))
                 </div>
-
             </div>
         </div>
     </div>
@@ -72,11 +70,10 @@
             <div class="col-md-6">
 
                 <div class="form-group">
-                    @Html.HiddenFor(model => Model.Bracos[i].Lado)
                     @Html.LabelFor(model => Model.Bracos[i].Cotovelo.CotoveloStatus, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-4">
-                        @Html.EnumDropDownListFor(model => Model.Bracos[i].Cotovelo.CotoveloStatus, new { htmlAttributes = new { @class = "drop form-control" } })
-                        @Html.ValidationMessageFor(model => Model.Bracos[i].Cotovelo.CotoveloStatus, "", new { @class = "text-danger" })
+                        @Html.Label(be.client.Source.EnumHelper.GetEnumName<be.business.Model.CotoveloStatus>(Model.Bracos[i].Cotovelo.CotoveloStatus))
+
                     </div>
                 </div>
             </div>
@@ -84,22 +81,14 @@
                 <div class="form-group">
                     @Html.LabelFor(model => Model.Bracos[i].Pulso.PulsoStatus, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-4">
-                        @Html.EnumDropDownListFor(model => Model.Bracos[i].Pulso.PulsoStatus, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => Model.Bracos[i].Pulso.PulsoStatus, "", new { @class = "text-danger" })
+                        @Html.Label(be.client.Source.EnumHelper.GetEnumName<be.business.Model.PulsoStatus>(Model.Bracos[i].Pulso.PulsoStatus))
+
                     </div>
                 </div>
             </div>
         </div>
 
-
     }
-    <div class="row">
-        <div class="col-lg-8" style="margin-top: 2%; margin-left: 15%">
-            <input type="submit" style="width:100%" value="Mover" class="btn btn-primary" />
-        </div>
-
-
-    </div>
 
 }
 
