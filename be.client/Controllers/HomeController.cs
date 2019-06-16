@@ -1,6 +1,7 @@
 ﻿using be.business.Model;
 using be.client.Models;
 using be.client.Source;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,49 +13,35 @@ namespace WebApplication4.Controllers
     public class HomeController : Controller
     {
         private Service Service;
-        
+
+
         public HomeController()
         {
             Service = ServiceFactory.GetService<Service>();
+            Service.Controller = this;
         }
 
-        public ActionResult Index(HomeViewModel homeViewModel)
+        public ActionResult Index(Movimento movimento)
         {
-            
-            return View(homeViewModel);
-        }
-
-        public ActionResult RotacionarCabeca(HomeViewModel rotacaoStatus)
-        {
-            Service.Put(rotacaoStatus);
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult InclinarCabeca(string inclinacao)
-        {
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult MoverBracoDireito(HomeViewModel homeViewModel)
-        {
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult MoverBracoEsquerdo(HomeViewModel homeViewModel)
-        {
-            return RedirectToAction("Index");
+            if (movimento.Cabeca == null)
+            {
+                try
+                {
+                    movimento = Service.Get();
+                } catch (Exception e)
+                {
+                    return RedirectToAction("Index", "Error");
+                }
+            }
+            return View(movimento);
         }
 
 
-
-        public ActionResult MoverCotovelo(Lado lado, CotoveloStatus cotoveloStatus)
+        [HttpPost]
+        public string Atualizar(Movimento movimento)
         {
-            return View();
-        }
-
-        public ActionResult MoverPulso(Lado lado, PulsoStatus pulsoStatus)
-        {
-            return View();
+            Service.Put(movimento);
+            return "Alterado!";
         }
 
 

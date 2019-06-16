@@ -22,12 +22,12 @@ namespace be.client.Source
 
         public Movimento Get()
         {
-            return Get<Movimento>("/api/movimento");
+            return Get<Movimento>("/movimento");
         }
 
-        public void Put(HomeViewModel homeViewModel)
+        public void Put(Movimento movimento)
         {
-            Invoke("/movimento", "PUT", homeViewModel);
+            Invoke("/movimento", "PUT", movimento);
         }
     }
 }

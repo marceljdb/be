@@ -1,5 +1,6 @@
 ﻿using be.business.Model;
 using be.business.Repository;
+using be.business.Utils;
 using Newtonsoft.Json;
 using Ninject;
 using System;
@@ -14,21 +15,32 @@ namespace be.Controllers
 {
     public class MovimentoController : ApiController
     {
-        [Inject]
         public MovimentoRepository MovimentoRepository;
+        public MovimentoController()
+        {
+            MovimentoRepository = new StandardKernel().Get<MovimentoRepository>();
+        }
 
         [Route("api/movimento")]
         public Movimento Get()
         {
-            var a = new StandardKernel().Get<MovimentoRepository>();
-            
-            var movimento = JsonConvert.DeserializeObject<Movimento>(a.FindFirst().Movimento);
-            return movimento; 
+            var movimento = MovimentoRepository.FindFirst();
+            return JsonConvert.DeserializeObject<Movimento>(movimento.Movimento);
         }
 
+   
+        [HttpPut]
+        [Route("api/movimento")]
         public HttpResponseMessage Put(Movimento movimento)
         {
+            try
+            {
+                
             return Request.CreateResponse(HttpStatusCode.OK);
+            } catch (Exception e)
+            {
+                return Request.CreateResponse<Error>(new Error(e.Message));
+            }
         }
 
 

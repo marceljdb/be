@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace be.business.Model
 {
     [Table("movimento")]
-    public class Mov
+    public class MovimentoEntity
     {
         [Key]
         [Column("id")]

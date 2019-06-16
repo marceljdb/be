@@ -7,16 +7,21 @@ using System.Text;
 
 namespace be.business.Repository
 {
-    public class MovimentoRepository : RepositoryBase<Mov>
+    public class MovimentoRepository : RepositoryBase<MovimentoEntity>
     {
-        public override IQueryable<Mov> FindAll()
+        public override IQueryable<MovimentoEntity> FindAll()
         {
             return BeModel.Movimento;
         }
 
-        public Mov FindFirst()
+        public MovimentoEntity FindFirst()
         {
             return BeModel.Movimento.FirstOrDefault();
+        }
+
+        public MovimentoEntity FindById(int id)
+        {
+            return BeModel.Movimento.Where(u => u.Id.Equals(id)).SingleOrDefault();
         }
 
        

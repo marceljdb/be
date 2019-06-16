@@ -101,10 +101,21 @@ namespace be.client.Source
             }
             catch (WebException err)
             {
+                GetError(err);
+                throw err;
+            }
+        }
+
+        private void GetError(WebException err)
+        {
+            try
+            {
                 var response = new StreamReader(err.Response.GetResponseStream()).ReadToEnd();
                 var responseError = JsonConvert.DeserializeObject<Error>(response);
                 SetErrorMessage(responseError);
-                return (T)Activator.CreateInstance(typeof(T));
+            } catch (Exception e)
+            {
+                SetErrorMessage(new Error("Serviço Indisponível", e.Message));
             }
         }
 

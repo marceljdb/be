@@ -20,7 +20,7 @@ namespace be.business.Model
             this.Configuration.ProxyCreationEnabled = false;
         }
 
-        public virtual DbSet<Mov> Movimento { get; set; }
+        public virtual DbSet<MovimentoEntity> Movimento { get; set; }
 
 
         protected void SetupSchema(DbModelBuilder modelBuilder)

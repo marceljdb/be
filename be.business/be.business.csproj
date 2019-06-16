@@ -76,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\MovimentoRepository.cs" />
     <Compile Include="Utils\EnumUtils.cs" />
+    <Compile Include="Utils\Error.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
