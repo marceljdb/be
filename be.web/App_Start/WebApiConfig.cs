@@ -22,6 +22,7 @@ namespace be
                 defaults: new { id = RouteParameter.Optional }
             );
             config.Filters.Add(new LocalRequestOnlyAttribute());
+
         }
     }
 

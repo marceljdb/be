@@ -1,4 +1,5 @@
 ﻿using be.business.Model;
+using be.client.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,5 +25,9 @@ namespace be.client.Source
             return Get<Movimento>("/api/movimento");
         }
 
+        public void Put(HomeViewModel homeViewModel)
+        {
+            Invoke("/movimento", "PUT", homeViewModel);
+        }
     }
 }

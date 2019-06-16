@@ -20,10 +20,10 @@ namespace be.Controllers
         [Route("api/movimento")]
         public Movimento Get()
         {
-            var a = MovimentoRepository.FindFirst();
-            var movimento = JsonConvert.DeserializeObject<Movimento>(a.Movimento);
+            var a = new StandardKernel().Get<MovimentoRepository>();
+            
+            var movimento = JsonConvert.DeserializeObject<Movimento>(a.FindFirst().Movimento);
             return movimento; 
-
         }
 
         public HttpResponseMessage Put(Movimento movimento)

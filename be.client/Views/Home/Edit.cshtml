@@ -1,4 +1,4 @@
-﻿@model be.business.Model.Movimento
+﻿@model be.client.Models.HomeViewModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -8,116 +8,87 @@
     <script src="~/Scripts/Home.js"></script>
 </body>
 
-
-
 @using (Html.BeginForm())
 {
 
     <div class="jumbotron text-center" style="background: rgb(39, 40, 34);">
         <h1>Controle R.O.B.O</h1>
+        @*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
     </div>
 
-    <div class="row text-center title-text">
+    <div class="row text-center">
         <h1>Cabeca</h1>
     </div>
-    <div class="row" style="margin-left: 10%;">
-        <div class="col-md-6">
+    <div class="row">
+        <div class="col-md-8">
             <div class="form-group">
                 @Html.LabelFor(model => model.RotacaoStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
+                <div class="col-md-2">
                     @Html.EnumDropDownListFor(model => model.RotacaoStatus, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.RotacaoStatus, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-2">
-                    <input type="submit" value="Mover" class="btn btn-primary" />
-                </div>
+                <a href="@Url.Action("RotacionarCabeca", "Home", new { Model })" class="btn btn-default">Mover!!</a>
 
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 @Html.LabelFor(model => model.InclinacaoStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
+                <div class="col-md-2">
                     @Html.EnumDropDownListFor(model => model.InclinacaoStatus, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.InclinacaoStatus, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-2">
-                    <input type="submit" value="Mover" class="btn btn-primary" />
-                </div>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                @*<a href="@Url.Action("InclinarCabeca", "Home", new { inclinacao = Enum.GetName(typeof(be.business.Model.InclinacaoStatus), Model.InclinacaoStatus) })" class="btn btn-default">Mover!!</a>*@
 
             </div>
         </div>
     </div>
 
-}
-
-@foreach (var item in Model.Bracos)
-{
-    <div class="row text-center title-text">
+    <div class="row">
         <h1>Braço Esquerdo</h1>
-    </div>
-    <div class="row" style="margin-left: 10%;">
-        <div class="col-md-6">
-            <div class="form-group">
-                @Html.LabelFor(model => item.Cotovelo.CotoveloStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
-                    @Html.EnumDropDownListFor(model => item.Cotovelo.CotoveloStatus, new { htmlAttributes = new { @class = "drop form-control" } })
-                    @Html.ValidationMessageFor(model => item.Cotovelo.CotoveloStatus, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-md-2">
-                    <input type="submit" value="Mover" class="btn btn-primary" />
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                @Html.LabelFor(model => model.PulsoStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
-                    @Html.EnumDropDownListFor(model => model.PulsoStatus, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PulsoStatus, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-md-2">
-                    <input type="submit" value="Mover" class="btn btn-primary" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-}
-
-
-
-@using (Html.BeginForm("MoverBracoDireito", "Home"))
-{
-
-    <div class="row text-center title-text">
-        <h1>Braço Direito</h1>
-    </div>
-    <div class="row" style="margin-left: 10%;">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 @Html.LabelFor(model => model.CotoveloStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
+                <div class="col-md-2">
                     @Html.EnumDropDownListFor(model => model.CotoveloStatus, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.CotoveloStatus, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-2">
-                    <input type="submit" value="Mover" class="btn btn-primary" />
-                </div>
-
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 @Html.LabelFor(model => model.PulsoStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
+                <div class="col-md-2">
                     @Html.EnumDropDownListFor(model => model.PulsoStatus, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PulsoStatus, "", new { @class = "text-danger" })
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <h1>Braço Direito</h1>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CotoveloStatus, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-2">
-                    <input type="submit" value="Mover" class="btn btn-primary" />
+                    @Html.EnumDropDownListFor(model => model.CotoveloStatus, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CotoveloStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PulsoStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EnumDropDownListFor(model => model.PulsoStatus, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PulsoStatus, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

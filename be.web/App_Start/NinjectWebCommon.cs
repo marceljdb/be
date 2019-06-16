@@ -6,6 +6,7 @@ namespace be.web.App_Start
     using System;
     using System.Web;
     using be.business.Model;
+    using be.business.Repository;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
@@ -61,7 +62,8 @@ namespace be.web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<BeModel>().ToSelf().InRequestScope();
+            kernel.Bind<BeModel>().ToSelf();
+            kernel.Bind<MovimentoRepository>().ToSelf();
         }        
     }
 }
