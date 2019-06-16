@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace be.business.Utils
 {
-    public class Error
+    public class Error : Exception
     {
         public String Mensagem { get; set; }
         public String ExceptionMessage { get; set; }
 
-        public Error(String mensagem)
+        public Error()
         {
-            this.Mensagem = mensagem;
+
         }
 
-        public Error(String Mensagem, String ExceptionMessage)
+        public Error(string message)
+           : base(message)
         {
-            this.Mensagem = Mensagem;
-            this.ExceptionMessage = ExceptionMessage;
         }
+      
     }
 }

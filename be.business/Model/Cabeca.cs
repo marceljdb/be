@@ -9,27 +9,46 @@ namespace be.business.Model
 {
     public class Cabeca
     {
-        //Anotation enum valid order
+
+        //Anotation enum valid order        
         [DisplayName("Rotação")]
-        public RotacaoStatus RotacaoStatus { get; set; }
-
+        public RotacaoStatus RotacaoStatus { get; set; }      
+        
         [DisplayName("Inclinação")]
-        public InclinacaoStatus InclinacaoStatus { get; set; } 
+        public InclinacaoStatus InclinacaoStatus { get; set; }
 
-        public Boolean IsValid(RotacaoStatus rotacaoStatus)
+        public void IsValid(Cabeca cabeca)
         {
-            return (rotacaoStatus != RotacaoStatus) &&
-            !InclinacaoStatus.Equals(InclinacaoStatus.BAIXO);
+            IsValidOrderRotacao(cabeca.RotacaoStatus);
+            IsValidOrderInclinacao(cabeca.InclinacaoStatus);
+            if (cabeca.RotacaoStatus != RotacaoStatus) {  
+                IsValidRotacao(cabeca.InclinacaoStatus);
+            }
         }
 
-        public Boolean IsValidOrderRotacao(RotacaoStatus status)
+        public void IsValidRotacao(InclinacaoStatus inclinacaoStatus)
         {
-            return EnumUtils.EnumValidOrder<RotacaoStatus>(RotacaoStatus, (int)status);
+            if (inclinacaoStatus.Equals(InclinacaoStatus.BAIXO))
+            {
+                throw new Exception("Rotação indisponível. Inclinação com Situaçao para Baixo");
+            };
         }
 
-        public Boolean IsValidOrderInclinacao(InclinacaoStatus status)
+        public void IsValidOrderRotacao(RotacaoStatus status)
         {
-            return EnumUtils.EnumValidOrder<InclinacaoStatus>(InclinacaoStatus, (int)status);
+            if (!EnumUtils.EnumValidOrder<RotacaoStatus>(RotacaoStatus, (int)status))
+            {
+                throw new Exception("Rotação indisponível. Movimento deve ser sequencial crescente/decrescente. Atual: " + RotacaoStatus.ToString());
+            }
+;
+        }
+
+        public void IsValidOrderInclinacao(InclinacaoStatus status)
+        {
+            if (!EnumUtils.EnumValidOrder<InclinacaoStatus>(InclinacaoStatus, (int)status))
+            {
+                throw new Exception("Inclinação indisponível. Movimento deve ser sequencial crescente/decrescente. Atual: " + InclinacaoStatus.ToString());
+            }
         }
 
     }

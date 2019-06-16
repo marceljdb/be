@@ -12,10 +12,31 @@ namespace be.business.Model
         [DisplayName("Pulso")]
         public PulsoStatus PulsoStatus { get; set; }
 
-        public Boolean IsValid(PulsoStatus status)
+        public void IsValid(PulsoStatus status, CotoveloStatus cotoveloStatus)
         {
-            return EnumUtils.EnumValidOrder<PulsoStatus>(PulsoStatus, (int)status);            
+            if (status != PulsoStatus)
+            {
+                IsValidOrder(status);
+                IsValidMovimento(cotoveloStatus);
+            }
         }
+
+        public void IsValidMovimento(CotoveloStatus status)
+        {
+            if (!status.Equals(CotoveloStatus.FORTEMENTE_CONTRAIDO)) {
+                throw new Exception("Pulso indisponível. Cotovelo não está Fortemente Contraido.");
+            }
+
+        }
+
+        public void IsValidOrder(PulsoStatus status)
+        {
+            if (!EnumUtils.EnumValidOrder<PulsoStatus>(PulsoStatus, (int)status))
+            {
+                throw new Exception("Pulso indisponível. Movimento deve ser sequencial crescente/decrescente. Atual: " + PulsoStatus.ToString());
+            };
+        }
+
 
     }
 

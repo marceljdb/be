@@ -21,13 +21,15 @@ namespace be.business.Facade
         {
             var mov = MovimentoRepository.FindById(movimento.Id);
             var a = JsonConvert.DeserializeObject<Movimento>(mov.Movimento);
-            if (!movimento.Cabeca.IsValid(a.Cabeca.RotacaoStatus))
-            {
-                throw new Exception("Rotação indisponível. Inclinação com Situaçao para Baixo"); 
-            }
+            
 
             mov.Movimento = JsonConvert.SerializeObject(movimento);
             MovimentoRepository.UpdateAndFlush(mov);
+        }
+
+        public Movimento Pesquisar()
+        {
+            return MovimentoRepository.FindFirst();
         }
 
 

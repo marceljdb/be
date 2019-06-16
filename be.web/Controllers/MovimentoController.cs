@@ -1,4 +1,5 @@
-﻿using be.business.Model;
+﻿using be.business.Facade;
+using be.business.Model;
 using be.business.Repository;
 using be.business.Utils;
 using Newtonsoft.Json;
@@ -16,6 +17,7 @@ namespace be.Controllers
     public class MovimentoController : ApiController
     {
         public MovimentoRepository MovimentoRepository;
+
         public MovimentoController()
         {
             MovimentoRepository = new StandardKernel().Get<MovimentoRepository>();
@@ -24,22 +26,31 @@ namespace be.Controllers
         [Route("api/movimento")]
         public Movimento Get()
         {
-            var movimento = MovimentoRepository.FindFirst();
-            return JsonConvert.DeserializeObject<Movimento>(movimento.Movimento);
+            return MovimentoRepository.FindFirst();
         }
 
-   
+
         [HttpPut]
         [Route("api/movimento")]
         public HttpResponseMessage Put(Movimento movimento)
         {
             try
             {
-                
-            return Request.CreateResponse(HttpStatusCode.OK);
-            } catch (Exception e)
+                var mov = MovimentoRepository.FindById(movimento.Id);    
+                var a = JsonConvert.DeserializeObject<Movimento>(mov.Movimento);
+                a.Cabeca.IsValid(movimento.Cabeca);
+                foreach (var item in a.Bracos)
+                {
+                    var braco = movimento.Bracos.Find(u => u.Lado.Equals(item.Lado));
+                    item.IsValid(braco);
+                }              
+                mov.Movimento = JsonConvert.SerializeObject(movimento);                
+                MovimentoRepository.UpdateAndFlush(mov);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
             {
-                return Request.CreateResponse<Error>(new Error(e.Message));
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, new Error(e.Message));
             }
         }
 

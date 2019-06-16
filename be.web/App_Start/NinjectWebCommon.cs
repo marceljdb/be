@@ -62,8 +62,7 @@ namespace be.web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<BeModel>().ToSelf();
-            kernel.Bind<MovimentoRepository>().ToSelf();
+            kernel.Bind<BeModel>().ToSelf().InRequestScope();
         }        
     }
 }

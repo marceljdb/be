@@ -12,10 +12,21 @@ namespace be.business.Model
         [DisplayName("Cotovelo")]
         public CotoveloStatus CotoveloStatus { get; set; }
 
-        public Boolean IsValid(CotoveloStatus status)
+        public void IsValid(CotoveloStatus status)
         {
-            EnumUtils.EnumValidOrder<CotoveloStatus>(CotoveloStatus, (int) status);
-            return CotoveloStatus.Equals(CotoveloStatus.FORTEMENTE_CONTRAIDO);
+            if (CotoveloStatus != status)
+            {
+                IsValidOrder(status);                
+            }           
+        }
+
+        
+        public void IsValidOrder(CotoveloStatus status)
+        {
+            if (!EnumUtils.EnumValidOrder<CotoveloStatus>(CotoveloStatus, (int)status))
+            {
+                throw new Exception("Cotovelo indisponível. Movimento deve ser sequencial crescente/decrescente. Atual: " + status.ToString());
+            }
         }
 
     }

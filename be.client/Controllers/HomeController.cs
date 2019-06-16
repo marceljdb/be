@@ -40,8 +40,16 @@ namespace WebApplication4.Controllers
         [HttpPost]
         public string Atualizar(Movimento movimento)
         {
-            Service.Put(movimento);
-            return "Alterado!";
+            try
+            {
+                Service.Put(movimento);
+                return "Alterado!";
+            } catch (Exception e)
+            {
+                ModelState.AddModelError("", e);
+                return e.Message;
+            }
+            
         }
 
 

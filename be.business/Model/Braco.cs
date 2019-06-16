@@ -14,5 +14,11 @@ namespace be.business.Model
         public Cotovelo Cotovelo { get; set; }
 
         public Lado Lado { get; set; }
+
+        public void IsValid(Braco braco)
+        {
+            Pulso.IsValid(braco.Pulso.PulsoStatus, braco.Cotovelo.CotoveloStatus);
+            Cotovelo.IsValid(braco.Cotovelo.CotoveloStatus);
+        }
     }
 }

@@ -77,6 +77,7 @@
     <Compile Include="Repository\MovimentoRepository.cs" />
     <Compile Include="Utils\EnumUtils.cs" />
     <Compile Include="Utils\Error.cs" />
+    <Compile Include="Utils\ValidOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

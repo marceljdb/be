@@ -1,5 +1,6 @@
 ﻿using be.business.Model;
 using be.business.Persistence;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,10 @@ namespace be.business.Repository
             return BeModel.Movimento;
         }
 
-        public MovimentoEntity FindFirst()
+        public Movimento FindFirst()
         {
-            return BeModel.Movimento.FirstOrDefault();
+            var movimento = BeModel.Movimento.FirstOrDefault();
+            return JsonConvert.DeserializeObject<Movimento>(movimento.Movimento);
         }
 
         public MovimentoEntity FindById(int id)
