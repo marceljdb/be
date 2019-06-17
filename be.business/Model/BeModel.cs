@@ -13,8 +13,9 @@ namespace be.business.Model
         public const string CONNECTION = "MovimentoConnection";
         public const string SCHEMA_PROPERTY = CONNECTION + ".Schema";
 
+
         public BeModel()
-            : base(new SqlCeConnection(@"Data Source="+ AppDomain.CurrentDomain.BaseDirectory + "bedb.sdf;Password=dbpass"), true)
+            : base(CONNECTION)
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
@@ -26,7 +27,7 @@ namespace be.business.Model
         protected void SetupSchema(DbModelBuilder modelBuilder)
         {
             var schemaName = ConfigurationManager.AppSettings[SCHEMA_PROPERTY];
-
+           
             if (!string.IsNullOrEmpty(schemaName))
                 modelBuilder.HasDefaultSchema(schemaName);
         }

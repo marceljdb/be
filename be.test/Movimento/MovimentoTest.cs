@@ -27,7 +27,6 @@ namespace be.test.MovimentoTest
         [TestMethod]
         public void IsValidMovimentarPulsoEsquerdo()
         {
-            var mov = Kernel.Get<MovimentoRepository>();
             MovimentarPulso(Lado.ESQUERDO);
         }
 
